@@ -9,10 +9,14 @@ namespace kamerun
     public partial class MainWindow : Window
     {
         OpenGL gl;
+        Point3d scale;
+        Point3d rotate;
         public MainWindow()
         {
             InitializeComponent();
             gl = openGLControl.OpenGL;
+            scale = new Point3d(0.2f, 0.2f, 0.2f);
+            rotate = new Point3d(0f, 0f, 0f);
         }
 
         private void SenegaleBuild()
@@ -188,7 +192,7 @@ namespace kamerun
         private void OpenGLControl_OpenGLInitialized(object sender, SharpGL.WPF.OpenGLRoutedEventArgs args)
         {
             gl.ClearColor(1f, 1f, 1f, 1f);
-            gl.Scale(0.2,0.2,0.2);
+            gl.Scale(scale.x,scale.y,scale.z);
         }
 
         private void OpenGLControl_Resized(object sender, SharpGL.WPF.OpenGLRoutedEventArgs args)
@@ -196,14 +200,19 @@ namespace kamerun
 
         }
 
-        private void openGLControl_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            
-        }
-
         private void openGLControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             gl.Rotate(4f, 4f, 0f);
+        }
+    }
+    struct Point3d
+    {
+        public float x, y, z;
+        public Point3d(float x, float y, float z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
     }
 }

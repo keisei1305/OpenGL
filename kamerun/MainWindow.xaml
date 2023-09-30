@@ -13,6 +13,6 @@
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
                            DrawFPS="False"
-                           MouseDoubleClick="openGLControl_MouseDoubleClick" MouseDown="openGLControl_MouseDown"/>
+                           MouseDown="openGLControl_MouseDown"/>
     </Grid>
 </Window>
