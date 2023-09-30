@@ -58,7 +58,6 @@ namespace kamerun
         private void Parallelepiped(double x, double y, double z, double dx, double dy, double dz)
         {
             gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0.6f, 0f);
             gl.Vertex(x+dx, y+dy, z+dz);
             gl.Vertex(x+dx, y+dy, z);
             gl.Vertex(x, y+dy, z);
@@ -66,7 +65,6 @@ namespace kamerun
             gl.End();
 
             gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0.6f, 0f);
             gl.Vertex(x + dx, y, z + dz);
             gl.Vertex(x + dx, y, z);
             gl.Vertex(x, y, z);
@@ -74,7 +72,6 @@ namespace kamerun
             gl.End();
 
             gl.Begin(OpenGL.GL_QUAD_STRIP);
-            gl.Color(0f, 0.6f, 0f);
             gl.Vertex(x + dx, y, z + dz);
             gl.Vertex(x + dx, y + dy, z + dz);
             gl.Vertex(x + dx, y, z);
@@ -89,95 +86,24 @@ namespace kamerun
         #region Всё для танков
         private void Bashnya()
         {
-            gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0.6f, 0f);
-            gl.Vertex(1f, 3f, 1f);
-            gl.Vertex(1f, 3f, -1f);
-            gl.Vertex(-1f, 3f, -1f);
-            gl.Vertex(-1f, 3f, 1f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0.6f, 0f);
-            gl.Vertex(1f, 1f, 1f);
-            gl.Vertex(1f, 1f, -1f);
-            gl.Vertex(-1f, 1f, -1f);
-            gl.Vertex(-1f, 1f, 1f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUAD_STRIP);
-            gl.Color(0f, 0.6f, 0f);
-            gl.Vertex(1f, 1f, 1f);
-            gl.Vertex(1f, 3f, 1f);
-            gl.Vertex(1f, 1f, -1f);
-            gl.Vertex(1f, 3f, -1f);
-            gl.Vertex(-1f, 1f, -1f);
-            gl.Vertex(-1f, 3f, -1f);
-            gl.Vertex(-1f, 1f, 1f);
-            gl.Vertex(-1f, 3f, 1f);
-            gl.End();
+            //x=-1f,y=1f,z=-1f dx=2f, dy = 2f, dz=2f
+            gl.Color(0f, 0.4f, 0f);
+            Parallelepiped(-1f,1f,-1f,2f,2f,2f);
         }
 
         private void Corpus()
         {
-            gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0.8f, 0f);
-            gl.Vertex(3f, 1f, 2f);
-            gl.Vertex(3f, 1f, -2f);
-            gl.Vertex(-3f, 1f, -2f);
-            gl.Vertex(-3f, 1f, 2f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0.8f, 0f);
-            gl.Vertex(3f, -1f, 2f);
-            gl.Vertex(3f, -1f, -2f);
-            gl.Vertex(-3f, -1f, -2f);
-            gl.Vertex(-3f, -1f, 2f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUAD_STRIP);
-            gl.Color(0f, 0.8f, 0f);
-            gl.Vertex(3f, -1f, 2f);
-            gl.Vertex(3f, 1f, 2f);
-            gl.Vertex(3f, -1f, -2f);
-            gl.Vertex(3f, 1f, -2f);
-            gl.Vertex(-3f, -1f, -2f);
-            gl.Vertex(-3f, 1f, -2f);
-            gl.Vertex(-3f, -1f, 2f);
-            gl.Vertex(-3f, 1f, 2f);
-            gl.End();
+            //x=-3f, y=-1f, z=-2f, dx=6f,dy=2f,dz=4f
+            gl.Color(0f, 0.5f, 0f);
+            Parallelepiped(-3f, -1f, -2f, 6f, 2f, 4f);
         }
 
         private void Dulo()
         {
             gl.Begin(OpenGL.GL_QUADS);
             gl.Color(0f, 0f, 0f);
-            gl.Vertex(1f, 2.5f, 0.2f);
-            gl.Vertex(1f, 2.5f, -0.2f);
-            gl.Vertex(4f, 2.5f, -0.2f);
-            gl.Vertex(4f, 2.5f, 0.2f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0f, 0f);
-            gl.Vertex(1f, 1.5f, 0.2f);
-            gl.Vertex(1f, 1.5f, -0.2f);
-            gl.Vertex(4f, 1.5f, -0.2f);
-            gl.Vertex(4f, 1.5f, 0.2f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUAD_STRIP);
-            gl.Color(0f, 0f, 0f);
-            gl.Vertex(1f, 1.5f, 0.2f);
-            gl.Vertex(1f, 2.5f, 0.2f);
-            gl.Vertex(1f, 1.5f, -0.2f);
-            gl.Vertex(1f, 2.5f, -0.2f);
-            gl.Vertex(4f, 1.5f, -0.2f);
-            gl.Vertex(4f, 2.5f, -0.2f);
-            gl.Vertex(4f, 1.5f, 0.2f);
-            gl.Vertex(4f, 2.5f, 0.2f);
-            gl.End();
+            //x=1f,y=1.5f,z=-0.2f,dx=3f,dy=1f,dz=0.4f
+            Parallelepiped(1f, 1.5f, -0.2f, 3f, 1f, 0.4f);
         }
 
         private void gusenica1()
@@ -256,6 +182,7 @@ namespace kamerun
         {
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             TankBuild();
+            gl.Flush();
         }
 
         private void OpenGLControl_OpenGLInitialized(object sender, SharpGL.WPF.OpenGLRoutedEventArgs args)
