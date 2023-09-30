@@ -55,6 +55,38 @@ namespace kamerun
             gl.End();
         }
 
+        private void Parallelepiped(double x, double y, double z, double dx, double dy, double dz)
+        {
+            gl.Begin(OpenGL.GL_QUADS);
+            gl.Color(0f, 0.6f, 0f);
+            gl.Vertex(x+dx, y+dy, z+dz);
+            gl.Vertex(x+dx, y+dy, z);
+            gl.Vertex(x, y+dy, z);
+            gl.Vertex(x, y + dy, z+dz);
+            gl.End();
+
+            gl.Begin(OpenGL.GL_QUADS);
+            gl.Color(0f, 0.6f, 0f);
+            gl.Vertex(x + dx, y, z + dz);
+            gl.Vertex(x + dx, y, z);
+            gl.Vertex(x, y, z);
+            gl.Vertex(x, y, z + dz);
+            gl.End();
+
+            gl.Begin(OpenGL.GL_QUAD_STRIP);
+            gl.Color(0f, 0.6f, 0f);
+            gl.Vertex(x + dx, y, z + dz);
+            gl.Vertex(x + dx, y + dy, z + dz);
+            gl.Vertex(x + dx, y, z);
+            gl.Vertex(x + dx, y + dy, z);
+            gl.Vertex(x, y, z);
+            gl.Vertex(x, y + dy, z);
+            gl.Vertex(x, y, z + dz);
+            gl.Vertex(x, y + dy, z + dz);
+            gl.End();
+        }
+
+        #region Всё для танков
         private void Bashnya()
         {
             gl.Begin(OpenGL.GL_QUADS);
@@ -209,6 +241,7 @@ namespace kamerun
             gl.Vertex(-2.3f, -1.6f, -1.8f);
             gl.End();
         }
+        #endregion
 
         private void TankBuild()
         {
