@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using SharpGL;
+using System;
 
 namespace kamerun
 {
@@ -61,6 +62,34 @@ namespace kamerun
             gl.Vertex(0f, -0.12f);
             gl.Vertex(-0.5f, -0.8f);
             gl.Vertex(0.5f, -0.8f);
+            gl.End();
+        }
+
+        private void SenegalLocal(Point3d point1, Point3d point2)
+        {
+            float dx = Math.Abs(point2.x - point1.x);
+            float dy = Math.Abs(point2.y - point1.y);
+            float dz = Math.Abs(point2.z - point1.z);
+
+            //Флаг без звезды
+            gl.Begin(OpenGL.GL_QUADS);
+            gl.Color(0.83f, 0.17f, 0.117f);
+            gl.Vertex(point1.x, point1.y, point1.z);
+            gl.Vertex(point1.x, point1.y + dy/3, point1.z);
+            gl.Vertex(point1.x + dx, point1.y + dy/3, point1.z + dz);
+            gl.Vertex(point1.x + dx, point1.y, point1.z + dz);
+
+            gl.Color(0f, 0.22f, 0.65f);
+            gl.Vertex(point1.x, point1.y + dy/3, point1.z);
+            gl.Vertex(point1.x, point1.y + 2 * dy / 3, point1.z);
+            gl.Vertex(point1.x + dx, point1.y + 2 * dy / 3, point1.z + dz);
+            gl.Vertex(point1.x + dx, point1.y + dy/3, point1.z + dz);
+
+            gl.Color(1f, 1f, 1f);
+            gl.Vertex(point1.x, point1.y+2*dy/3,point1.z);
+            gl.Vertex(point1.x, point1.y+dy, point1.z);
+            gl.Vertex(point1.x + dx, point1.y + dy, point1.z+dz);
+            gl.Vertex(point1.x + dx, point1.y+ 2 * dy / 3, point1.z+dz);
             gl.End();
         }
         #endregion
@@ -335,7 +364,7 @@ namespace kamerun
         #endregion
         private void openGLControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            gl.Rotate(15f, 15f, 0f);
+            gl.Rotate(0f, 15f, 0f);
             openGLControl.DoRender();
             Draw();
         }
@@ -343,7 +372,7 @@ namespace kamerun
         private void Draw()
         {
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            TankBuild();
+            SenegalLocal(new Point3d(-3f,-3f,0f), new Point3d(3f,3f,0f));
         }
     }
 }
