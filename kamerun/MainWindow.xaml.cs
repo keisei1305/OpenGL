@@ -72,57 +72,53 @@ namespace kamerun
         {
             //x=-1f,y=1f,z=-1f dx=2f, dy = 2f, dz=2f
             gl.Color(0f, 0.4f, 0f);
-            Parallelepiped(-1f, 1f, -1f, 2f, 2f, 2f);
+            Prism(2f,
+                new Point3d(-1f,1f,-1f),
+                new Point3d(-1f,3f,-1f),
+                new Point3d(1f,3f,-1f),
+                new Point3d(1f,1f,-1f));
         }
 
         private void Corpus()
         {
             //x=-3f, y=-1f, z=-2f, dx=6f,dy=2f,dz=4f
             gl.Color(0f, 0.5f, 0f);
-            Parallelepiped(-3f, -1f, -2f, 6f, 2f, 4f);
+            Prism(4f,
+                new Point3d(-3f, -1f, -2f),
+                new Point3d(-3f, 1f, -2f),
+                new Point3d(3f, 1f, -2f),
+                new Point3d(3f, -1f, -2f));
         }
 
         private void Dulo()
         {
-            gl.Begin(OpenGL.GL_QUADS);
             gl.Color(0f, 0f, 0f);
             //x=1f,y=1.5f,z=-0.2f,dx=3f,dy=1f,dz=0.4f
-            Parallelepiped(1f, 1.5f, -0.2f, 3f, 1f, 0.4f);
+            Prism(0.4f,
+                new Point3d(1f,1.5f,-0.2f),
+                new Point3d(1f,2.5f,-0.2f),
+                new Point3d(4f,2.5f,-0.2f),
+                new Point3d(4f,1.5f,-0.2f));
         }
 
         private void gusenica1()
         {
+            gl.Color(0f, 0f, 0f);
+            Prism(0.8f,
+                new Point3d(-2.5f,-0.8f,1f),
+                new Point3d(-2f,-1.6f,1f),
+                new Point3d(1.5f,-1.6f,1f),
+                new Point3d(2.5f,-0.8f,1f));
         }
 
         private void gusenica2()
         {
-            gl.Begin(OpenGL.GL_QUADS);
             gl.Color(0f, 0f, 0f);
-            gl.Vertex(2.5f, -0.8f, -1.8f);
-            gl.Vertex(2.5f, -0.8f, -1.6f);
-            gl.Vertex(-2.5f, -0.8f, -1.6f);
-            gl.Vertex(-2.5f, -0.8f, -1.8f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUADS);
-            gl.Color(0f, 0f, 0f);
-            gl.Vertex(2.3f, -1.6f, -1.8f);
-            gl.Vertex(2.3f, -1.6f, -1.6f);
-            gl.Vertex(-2.3f, -1.6f, -1.6f);
-            gl.Vertex(-2.3f, -1.6f, -1.8f);
-            gl.End();
-
-            gl.Begin(OpenGL.GL_QUAD_STRIP);
-            gl.Color(0f, 0f, 0f);
-            gl.Vertex(2.5f, -0.8f, -1.8f);
-            gl.Vertex(2.3f, -1.6f, -1.8f);
-            gl.Vertex(2.5f, -0.8f, -1.6f);
-            gl.Vertex(2.3f, -1.6f, -1.6f);
-            gl.Vertex(-2.5f, -0.8f, -1.6f);
-            gl.Vertex(-2.3f, -1.6f, -1.6f);
-            gl.Vertex(-2.5f, -0.8f, -1.8f);
-            gl.Vertex(-2.3f, -1.6f, -1.8f);
-            gl.End();
+            Prism(0.8f,
+                new Point3d(-2.5f, -0.8f, -1.8f),
+                new Point3d(-2f, -1.6f, -1.8f),
+                new Point3d(1.5f, -1.6f, -1.8f),
+                new Point3d(2.5f, -0.8f, -1.8f));
         }
         #endregion
 
@@ -157,6 +153,36 @@ namespace kamerun
             gl.End();
 
             gl.Begin(OpenGL.GL_QUAD_STRIP);
+            gl.Vertex(x + dx, y, z + dz);
+            gl.Vertex(x + dx, y + dy, z + dz);
+            gl.Vertex(x + dx, y, z);
+            gl.Vertex(x + dx, y + dy, z);
+            gl.Vertex(x, y, z);
+            gl.Vertex(x, y + dy, z);
+            gl.Vertex(x, y, z + dz);
+            gl.Vertex(x, y + dy, z + dz);
+            gl.End();
+        }
+        private void Parallelepiped(RGB[] rgb,double x, double y, double z, double dx, double dy, double dz)
+        {
+            gl.Begin(OpenGL.GL_QUADS);
+            gl.Color(rgb[0].rgb);
+            gl.Vertex(x + dx, y + dy, z + dz);
+            gl.Vertex(x + dx, y + dy, z);
+            gl.Vertex(x, y + dy, z);
+            gl.Vertex(x, y + dy, z + dz);
+            gl.End();
+
+            gl.Begin(OpenGL.GL_QUADS);
+            gl.Color(rgb[1].rgb);
+            gl.Vertex(x + dx, y, z + dz);
+            gl.Vertex(x + dx, y, z);
+            gl.Vertex(x, y, z);
+            gl.Vertex(x, y, z + dz);
+            gl.End();
+
+            gl.Begin(OpenGL.GL_QUAD_STRIP);
+            gl.Color(rgb[2].rgb);
             gl.Vertex(x + dx, y, z + dz);
             gl.Vertex(x + dx, y + dy, z + dz);
             gl.Vertex(x + dx, y, z);
@@ -309,7 +335,7 @@ namespace kamerun
         #endregion
         private void openGLControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            gl.Rotate(15f, 0f, 0f);
+            gl.Rotate(15f, 15f, 0f);
             openGLControl.DoRender();
             Draw();
         }
@@ -317,7 +343,7 @@ namespace kamerun
         private void Draw()
         {
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            symbolM();
+            TankBuild();
         }
     }
 }
