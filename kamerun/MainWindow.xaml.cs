@@ -395,7 +395,6 @@ namespace kamerun
             await Task.Delay(60);
             Update();
         }
-
         private void Draw()
         {
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
