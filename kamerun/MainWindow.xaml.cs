@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using SharpGL;
 using System;
+using System.Threading.Tasks;
 
 namespace kamerun
 {
@@ -96,7 +97,21 @@ namespace kamerun
 
         #region Задание 2        
 
-        #region Всё для танков
+        #region Всё для танков        
+        private void Z()
+        {
+            gl.Begin(OpenGL.GL_QUAD_STRIP);
+            float z = 1.0001f;
+            gl.Vertex(0.3f,2.5f,z);
+            gl.Vertex(0.3f,2.25f,z);
+            gl.Vertex(-0.3f, 2.5f, z);
+            gl.Vertex(0f,2.25f,z);
+            gl.Vertex(0f, 1.75f, z);
+            gl.Vertex(0.3f, 1.5f, z);
+            gl.Vertex(-0.3f, 1.75f, z);
+            gl.Vertex(-0.3f, 1.5f, z);
+            gl.End();
+        }
         private void Bashnya()
         {
             //x=-1f,y=1f,z=-1f dx=2f, dy = 2f, dz=2f
@@ -106,12 +121,15 @@ namespace kamerun
                 new Point3d(-1f,3f,-1f),
                 new Point3d(1f,3f,-1f),
                 new Point3d(1f,1f,-1f));
+            SenegalLocal(new Point3d(-0.5f,1.5f,-1.0001f), new Point3d(0.5f, 2.5f,-1.0001f));
+            gl.Color(1f,1f,1f);
+            Z();
         }
 
         private void Corpus()
         {
             //x=-3f, y=-1f, z=-2f, dx=6f,dy=2f,dz=4f
-            gl.Color(0f, 0.5f, 0f);
+            gl.Color(0f, 0.6f, 0f);
             Prism(4f,
                 new Point3d(-3f, -1f, -2f),
                 new Point3d(-3f, 1f, -2f),
@@ -354,7 +372,7 @@ namespace kamerun
         {
             gl.ClearColor(1f, 1f, 1f, 1f);
             gl.Scale(scale.x,scale.y,scale.z);
-            Draw();
+            Update();
         }
 
         private void OpenGLControl_Resized(object sender, SharpGL.WPF.OpenGLRoutedEventArgs args)
@@ -369,10 +387,19 @@ namespace kamerun
             Draw();
         }
 
+        async private void Update()
+        {
+            gl.Rotate(4f, 4f, 0f);
+            openGLControl.DoRender();
+            Draw();
+            await Task.Delay(60);
+            Update();
+        }
+
         private void Draw()
         {
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            SenegalLocal(new Point3d(-3f,-3f,0f), new Point3d(3f,3f,0f));
+            TankBuild();
         }
     }
 }

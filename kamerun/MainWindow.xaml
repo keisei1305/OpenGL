@@ -13,6 +13,6 @@
                            OpenGLInitialized="OpenGLControl_OpenGLInitialized"
                            Resized="OpenGLControl_Resized"
                            DrawFPS="False"
-                           MouseDown="openGLControl_MouseDown"/>
+                           MouseDown="openGLControl_MouseDown" FrameRate="48"/>
     </Grid>
 </Window>
